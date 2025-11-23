@@ -1,11 +1,11 @@
 # Amazon-Music-Clustering-
 This project uses unsupervised machine learning to cluster Amazon Music tracks based on audio features. With millions of songs, manually tagging genres or organizing playlists becomes difficult. Clustering helps automatically group similar songs and uncover patterns that may represent genres, moods, or listening behaviors.
-# 🎵 Amazon Music Clustering
 A Machine Learning project to automatically group similar songs based on their audio characteristics using **unsupervised learning**.
 
 ---
 
 ## 📌 Project Overview
+This project applies unsupervised machine learning techniques to cluster songs from the Amazon music dataset based on their audio characteristics. With millions of tracks available, genre labeling and playlist organization become challenging. This project uses clustering algorithms to automatically group similar songs — revealing patterns that may represent genres, moods, or listening styles
 With millions of songs online, manually tagging or grouping tracks into genres is inefficient.  
 This project uses clustering algorithms — primarily **K-Means** — to automatically identify patterns and group similar tracks based on audio features like:
 
@@ -48,6 +48,8 @@ The output clusters may represent genres, moods, or listening behavior patterns.
 
 ## 📂 Dataset
 
+Filename: single_genre_artists.csv
+
 The dataset contains various numeric audio features extracted from Amazon Music.  
 Example columns:
 
@@ -66,7 +68,11 @@ Non-numeric identifiers such as track name and artist name were removed before c
 ## ⚙️ Methodology
 
 ### 1️⃣ Data Exploration & Cleaning
-- Removed duplicates and irrelevant columns  
+- Removed duplicates and irrelevant columns
+- Load dataset using pandas
+✔ Explore shape, datatypes, missing values, duplicates
+✔ Remove irrelevant columns:
+track_name, track_id, artist_name
 - Handled missing values  
 - Visualized feature distributions  
 
@@ -74,13 +80,28 @@ Non-numeric identifiers such as track name and artist name were removed before c
 Used **StandardScaler** — scaling is critical for distance-based algorithms.
 
 ### 3️⃣ Feature Selection
-Selected key musical attributes (e.g., `energy`, `tempo`, `valence`).
+Selected key musical attributes ().danceability, energy, loudness, speechiness, acousticness,
+instrumentalness, liveness, valence, tempo, duration_ms
+Dimensionality Reduction (Optional)
+
+Used for visualization only:
+
+PCA (2 components) → for 2D scatter plot
+
+t-SNE (optional) for better separation in high-dimensional music space
 
 ### 4️⃣ Clustering
 - Applied **K-Means**
 - Determined best number of clusters using:
   - Elbow Method
   - Silhouette Score
+  - 
+Cluster Evaluation & Interpretation
+
+Use:
+     Silhouette Score
+     Davies-Bouldin Index
+     Cluster centroids interpret meanings:
 
 ### 5️⃣ Visualization
 - PCA 2D scatter plot  
@@ -93,12 +114,12 @@ Selected key musical attributes (e.g., `energy`, `tempo`, `valence`).
 
 The final model grouped songs into meaningful patterns:
 
-| Cluster | Characteristics | Interpretation |
-|--------|-----------------|----------------|
-| Cluster 0 | High tempo, high energy | Workout / EDM |
-| Cluster 1 | Calm tempo, high acousticness | Chill / Relax |
-| Cluster 2 | High speechiness | Hip-hop / Rap |
-| Cluster 3 | High valence + danceability | Pop / Happy vibes |
+| Cluster ID | Characteristics                | Cluster Meaning      |
+| ---------- | ------------------------------ | -------------------- |
+| 0          | High energy + fast tempo       | 🎉 Party / Dance     |
+| 1          | Low energy + high acousticness | 🎧 Chill / Acoustic  |
+| 2          | High speechiness               | 🎤 Rap / Spoken word |
+
 
 These groupings can support playlist automation, recommendation engines, or audience behavior analysis.
 
@@ -115,5 +136,4 @@ A user-friendly Streamlit dashboard is included to:
 
 Launch with:
 
-```bash
 streamlit run app.py
